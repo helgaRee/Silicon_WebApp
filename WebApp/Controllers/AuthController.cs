@@ -7,20 +7,12 @@ using WebApp.ViewModels;
 
 namespace WebApp.Controllers;
 
-public class AuthController : Controller
+public class AuthController(UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager, DataContext context = null) : Controller
 {
 
-    private readonly UserManager<UserEntity> _userManager;
-    private readonly SignInManager<UserEntity> _signInManager;
-    private readonly DataContext _context;
-
-    public AuthController(UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager, DataContext context = null)
-    {
-        _userManager = userManager;
-        _signInManager = signInManager;
-        _context = context;
-    }
-
+    private readonly UserManager<UserEntity> _userManager = userManager;
+    private readonly SignInManager<UserEntity> _signInManager = signInManager;
+    private readonly DataContext _context = context;
 
     [Route("/signup")]
     public IActionResult SignUp()

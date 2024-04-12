@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.Security.Claims;
+using System.Text;
 using WebApp.ViewModels;
 using WebApp.ViewModels.Models;
 
@@ -12,66 +14,54 @@ namespace WebApp.Controllers;
 
 [Authorize]
 //tar emot en UserManager<UserEntity> och en DataContext genom dependency injection.
-public class AccountController(UserManager<UserEntity> userManager, DataContext context) : Controller
+public class AccountController(UserManager<UserEntity> userManager, DataContext context, HttpClient httpClient) : Controller
 {
     //Initialiserar privata fält för UserManager och DataContext.
     public readonly UserManager<UserEntity> _userManager = userManager;
     private readonly DataContext _context = context;
-
-
-
-
-
-
-
-
+    private readonly HttpClient _httpClient = httpClient;
 
 
     //En GET-metod som returnerar en vy för att visa användardetaljer.
     //Den skapar en ny AccountDetailsViewModel och skickar den till vyn.
-    [HttpGet]
+    //populera information för användaren
+
     public async Task<IActionResult> Details()
     {
-        try
+
+        //Hämtar användarens ID från claims (identitetsinformation).
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+
+        //Hämtar användaren från databasen inklusive dess adressinformation.
+        var user = await _context.Users.Include(i => i.AddressEntity).FirstOrDefaultAsync(x => x.Id == nameIdentifier);
+
+        //Skapa viewModeln för att kunna Hämta informationen och populera informationer till den.
+
+
+
+        var viewModel = new AccountDetailsViewModel
         {
-            //Hämtar användarens ID från claims (identitetsinformation).
-            var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
-
-            //Hämtar användaren från databasen inklusive dess adressinformation.
-            var user = await _context.Users.Include(i => i.AddressEntity).FirstOrDefaultAsync(x => x.Id == nameIdentifier);
-
-            if (user != null && user.AddressEntity != null)
+            BasicInfo = new AccountBasicInfo
             {
+                FirstName = user?.FirstName ?? string.Empty,
+                LastName = user?.LastName ?? string.Empty,
+                Email = user?.Email ?? string.Empty,
+                PhoneNumber = user?.PhoneNumber ?? string.Empty,
+                Biography = user?.Biography ?? string.Empty,
+            },
 
-                //Skapa viewModeln för att kunna Hämta informationen och populera informationer till den.
-                var viewModel = new AccountDetailsViewModel
-                {
-                    BasicInfo = new AccountBasicInfo
-                    {
-                        FirstName = user!.FirstName,
-                        LastName = user.LastName,
-                        Email = user.Email!,
-                        PhoneNumber = user.PhoneNumber,
-                        Biography = user.Biography,
-                    },
+            AddressInfo = new AccountAddressInfo
+            {
+                AddressLine_1 = user?.AddressEntity?.AddressLine_1 ?? string.Empty,
+                AddressLine_2 = user?.AddressEntity?.AddressLine_2 ?? string.Empty,
+                PostalCode = user?.AddressEntity?.PostalCode ?? string.Empty,
+                City = user?.AddressEntity?.City ?? string.Empty,
+            },
+        };
 
-                    AddressInfo = new AccountAddressInfo
-                    {
-                        AddressLine_1 = user.AddressEntity!.AddressLine_1,
-                        AddressLine_2 = user.AddressEntity.AddressLine_2,
-                        PostalCode = user.AddressEntity.PostalCode,
-                        City = user.AddressEntity.City,
-                    },
-                };
-                return View(viewModel);
-            }
-            return RedirectToAction("Details", "Account");
-        }
-        catch (Exception ex)
-        {
-            TempData["StatusMessage"] = "The request failed.";
-        }
-        return RedirectToAction("Details", "Account");
+
+
+        return View(viewModel);
 
     }
 
@@ -89,21 +79,16 @@ public class AccountController(UserManager<UserEntity> userManager, DataContext 
             //Uppdaterar användarens grundläggande information med samma värden som tidigare (ingen faktisk uppdatering).
             if (user != null)
             {
-
-
-                user.FirstName = user.FirstName;
-                user.LastName = user.LastName;
-                user.Email = user.Email;
-                user.PhoneNumber = user.PhoneNumber;
-                user.UserName = user.Email;
-                user.Biography = user.Biography;
+                user.FirstName = model.BasicInfo!.FirstName;
+                user.LastName = model.BasicInfo!.LastName;
+                user.Email = model.BasicInfo!.Email;
+                user.PhoneNumber = model.BasicInfo!.PhoneNumber;
+                user.UserName = model.BasicInfo!.Email;
+                user.Biography = model.BasicInfo!.Biography;
 
                 //Uppdaterar användarinformationen asynkront med UserManager.
-                var result = _userManager.UpdateAsync(user);
-
-
-                //Sätter ett statusmeddelande beroende på om uppdateringen lyckades eller misslyckades.
-                if (result.IsCompletedSuccessfully)
+                var result = await _userManager.UpdateAsync(user);
+                if (result.Succeeded)
                 {
                     TempData["StatusMessage"] = "The User was updated.";
                 }
@@ -111,6 +96,7 @@ public class AccountController(UserManager<UserEntity> userManager, DataContext 
                 {
                     TempData["StatusMessage"] = "Update failed.";
                 }
+
             }
         }
         else
@@ -174,7 +160,7 @@ public class AccountController(UserManager<UserEntity> userManager, DataContext 
                     TempData["StatusMessage"] = "Updated Address information succesfully.";
 
                 }
-                catch (Exception ex)
+                catch
                 {
                     TempData["StatusMessage"] = "Unable to save address information.";
                 }
@@ -187,5 +173,79 @@ public class AccountController(UserManager<UserEntity> userManager, DataContext 
         return RedirectToAction("Details", "Account");
     }
 
+    [HttpPost]
+    public async Task<IActionResult> UploadProfileImage(IFormFile file)
+    {
+        //Hämtar usern
+        var user = await _userManager.GetUserAsync(User);
+
+        //kontroll om de är tomma
+        if (user != null && file != null && file.Length != 0)
+        {
+            //skapa unikt filnamn - hämtar Id för user - unikt id för bilden - ändrar filändelsen
+            var fileName = $"p_{user.Id}_{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+
+            //skapa filvägen - spara in i katalogen ...
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/uploads/profiles", fileName);
+
+            // ? - skapar en ny fil
+            using var fs = new FileStream(filePath, FileMode.Create);
+            //uppladdning av bild - "kopierar filen"
+            await file.CopyToAsync(fs);
+
+            //sätter det nya filnamnet till userna profilimage
+            user.ProfileImage = fileName;
+            //Uppdaterar
+            await _userManager.UpdateAsync(user);
+        }
+        else
+        {
+            TempData["StatusMessage"] = "Unable to upload profile image.";
+        }
+
+
+
+        //Ska inte returnera en egen vy, utan ska dirigera tillbaka till details när den är klar. "En omladdning av sidan krävs"
+        return RedirectToAction("Details", "Account");
+    }
+
+
+    [HttpPost]
+    public async Task<IActionResult> UnSubscribe(SubscribeViewModel viewModel)
+    {
+
+        //hitta emailen
+        var subscribedEmail = await _context.Users.FirstOrDefaultAsync(x => x.Email == viewModel.Email);
+        if (subscribedEmail != null)
+        {
+            if (ModelState.IsValid)
+            {
+                // Skapa en ny modell enbart med e-postadressen
+                var emailModel = new SubscribeViewModel { Email = viewModel.Email };
+
+
+                var content = new StringContent(JsonConvert.SerializeObject(emailModel), Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync("https://localhost:7077/api/Subscribe", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["StatusMessage"] = "You have unsubscribed successfully!";
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    TempData["StatusMessage"] = "Email address not found.";
+                }
+            }
+            else
+            {
+                TempData["StatusMessage"] = "Something went wrong, please try again.";
+            }
+
+        }
+
+
+        return RedirectToAction("Home", "Default");
+
+    }
 
 }

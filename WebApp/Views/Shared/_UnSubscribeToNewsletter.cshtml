@@ -1,0 +1,25 @@
+﻿@model SubscribeViewModel
+
+<form method="post" asp-action="Unsubscribe" asp-controller="Default">
+    <div class="form-email">
+        <div class="input-group">
+            <i class="fa-regular fa-envelope"></i>
+            <input asp-for="Email" />
+        </div>
+        <button type="submit" class="btn-gray btn-theme">Unsubscribe *</button>
+    </div>
+
+    @if (!string.IsNullOrEmpty(TempData["StatusMessage"]?.ToString()))
+    {
+        <span class="status-message">@TempData["StatusMessage"]</span>
+        <a asp-action="Subscribe" asp-controller="Default" class="unsubscribe">Go back</a>
+    }
+    else if (Model != null && (Model.DailyNewsletter || Model.AdvertisingUpdates || Model.WeekInReview || Model.EventUpdates || Model.StartupsWeekly || Model.Podcasts))
+    {
+        <span class="status-message">You are currently subscribed.</span>
+    }
+    else
+    {
+        <span class="status-message">* Yes, I agree to unsubscribe.</span>
+    }
+</form>

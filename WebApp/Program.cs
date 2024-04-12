@@ -7,8 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
-
-
+//Registrerar HttpClient
+builder.Services.AddHttpClient();
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("WebApp_Database")));
 //Registrering av IDentity
 builder.Services.AddIdentity<UserEntity, IdentityRole>(x =>

@@ -1,3 +1,27 @@
-﻿@{
+﻿@using Azure.Core
+
+
+<partial name="_SubscribeToNewsletter" />
+
+
+
+
+@* 
+<partial name="_UnSubscribeToNewsletter" />
+@using Azure.Core
+@{
     ViewData["Title"] = "Home";
+
+    // Antag att du har en metod eller service som kontrollerar om användaren är prenumererad
+    bool isSubscribed = YourSubscriptionService.IsUserSubscribed(User.Identity.Name);
+
+    // Visa UnSubscribe-knappen om användaren är prenumererad
+    bool showUnsubscribe = isSubscribed;
 }
+
+<partial name="_SubscribeToNewsletter" />
+
+@if (showUnsubscribe)
+{
+    <partial name="_UnSubscribeToNewsletter" />
+} *@

@@ -1,0 +1,46 @@
+form{
+    width: 100%;
+    display: grid;
+    font-size: 16px;
+    font-weight: 400;
+
+    .input-group{
+        display: grid;
+    }
+
+    .checkbox-group {
+        input[type = checkbox] {
+            margin-right: 10px;
+        }
+
+        .input-group {
+            display:flex;
+            align-items: center;
+        }
+    }
+
+
+    input {
+        font-size: 16px;
+        font-weight: 400 !important;
+        padding: 16px;
+        border-radius: 8px;
+        border: 1px solid $gray-400;
+
+        &::placeholder {
+            opacity: 0.5;
+        }
+    }
+
+    input[type=checkbox] {
+        height: 20px;
+        width: 20px;
+        margin: 0;
+    }
+
+    button {
+        font-size: 16px;
+        font-weight: 400 !important;
+        width: 100%;
+    }
+}

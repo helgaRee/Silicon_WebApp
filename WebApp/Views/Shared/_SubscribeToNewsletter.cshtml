@@ -1,0 +1,94 @@
+﻿@model SubscribeViewModel
+
+<section id="subscribe" class="subscribe">
+    <div class="container">
+        <div class="title">
+            <h2>Don't want to miss Anything</h2>
+            <img src="~/images/icons/arrow_curly.svg" alt="swirl arrow">
+        </div>            
+            <form method="post" asp-action="Subscribe" asp-controller="Default">
+             <div class="alternative">
+                 <h4 id="">Sign up for Newsletters</h4>
+
+                 <div class="options">
+                     <div class="checkbox-group">
+                        <div class="input-group" id="daily">
+                            <input asp-for="DailyNewsletter" />
+                            <label asp-for="DailyNewsletter">Daily Newsletter</label>
+                        </div>
+                     </div>
+
+                    <div class="checkbox-group">
+                        <div class="input-group" id="advertising">
+                            <input asp-for="AdvertisingUpdates" />
+                            <label asp-for="AdvertisingUpdates">Advertising Updates</label>
+                        </div>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <div class="input-group" id="week">
+                            <input asp-for="WeekInReview" />
+                            <label asp-for="WeekInReview">Week In Review</label>
+                        </div>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <div class="input-group" id="event">
+                            <input asp-for="EventUpdates" />
+                            <label asp-for="EventUpdates">Event Updates</label>
+                        </div>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <div class="input-group" id="startup">
+                            <input asp-for="StartupsWeekly" />
+                            <label asp-for="StartupsWeekly">Start Up</label>
+                        </div>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <div class="input-group" id="podcasts">
+                            <input asp-for="Podcasts" />
+                            <label asp-for="Podcasts">Podcasts</label>
+                        </div>
+                    </div>
+                 </div>
+             </div>
+
+                <div class="form-email">
+                    <div class="input-group">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input asp-for="Email"/>
+                    </div>
+                    <button type="submit" class="btn-gray btn-theme">Subscribe *</button>
+                </div>
+
+            @if(!string.IsNullOrEmpty(TempData["StatusMessage"]?.ToString()))
+            {
+                <span class="status-message">@TempData["StatusMessage"]</span>
+            }
+            else
+            {
+                <span class="status-message">* Yes, I agree to the terms and privacy policy.</span>
+            }
+        </form>
+
+    </div>
+</section>
+
+
+@* @if (!string.IsNullOrEmpty(TempData["StatusMessage"]?.ToString()))
+{
+    <span class="status-message">@TempData["StatusMessage"]</span>
+
+    <!-- Lägg till Unsubscribe-länken här om användaren är prenumererad -->
+    @if (Model.Email != null)
+    {
+        <a asp-action="Unsubscribe" asp-controller="Account" class="unsubscribe">Unsubscribe</a>
+    }
+}
+else
+{
+    <span class="status-message">* Yes, I agree to the terms and privacy policy.</span>
+}
+    *@
