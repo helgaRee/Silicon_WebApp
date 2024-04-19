@@ -6,31 +6,33 @@
         .heading {
             text-align: center;
 
-            h2{
+            h2 {
                 @include h1;
             }
-            p{   
-                    width: 50%;
-                    margin: 0 auto;
-                    margin-top: 1rem;
-                    @include text-lg;
-                    color: $gray-600;
+
+            p {
+                width: 50%;
+                margin: 0 auto;
+                margin-top: 1rem;
+                @include text-lg;
+                color: $gray-600;
             }
         }
 
-        .content {
+        .tools {
             display: grid;
             grid-template-columns: auto;
             gap: 1rem;
             text-align: center;
             margin-top: 4rem;
 
-            .box {
+            .tool {
                 margin: 0 auto;
                 width: 50%;
                 margin-bottom: 2rem;
 
-                img {}
+                img {
+                }
 
                 p {
                     margin: 0 auto;
@@ -39,9 +41,9 @@
                     color: $gray-700;
                 }
             }
-            }
         }
     }
+}
 
 
 @media (min-width: 600px) {
@@ -49,18 +51,8 @@
 
         .container {
 
-            .heading {}
-
-            .content {
+            .tools {
                 grid-template-columns: repeat(2, 1fr);
-              
-
-                .box {
-
-                    img {}
-
-                    p {}
-                }
             }
         }
     }
@@ -71,18 +63,12 @@
 
         .container {
 
-            .heading {}
+            .heading {
+            }
 
-            .content {
+            .tools {
                 grid-template-columns: repeat(3, 1fr);
                 text-align: left;
-
-                .box {
-
-                    img {}
-
-                    p {}
-                }
             }
         }
     }
@@ -93,18 +79,19 @@
 
         .container {
 
-            .heading {}
-
-            .content {
+            .tools {
                 grid-template-columns: repeat(4, 1fr);
-
-                .box {
-
-                    img {}
-
-                    p {}
-                }
             }
+        }
+    }
+}
+
+
+@media (min-width: 1400px) {
+    .work-tools {
+        padding-inline: 9rem;
+
+        .container {
         }
     }
 }

@@ -1,0 +1,51 @@
+﻿
+@model ShowcaseViewModel
+
+
+@{
+    ViewData["Title"] = "";
+}
+<section class="showcase">
+    <div class="container">
+        <img src="~/images/sections/showcase-image.svg" alt="Showcase image" class="background-image">
+        <div class="content">
+            <h1>Task Management Assistant you gonna lova</h1>
+            <p>We offer you a new generation of task management system. Plan, manage & track all your tasks in one flexible tool.</p>
+            <a asp-action="TaskManagement" asp-asp-controller="Products" class="btn btn-theme">Get started for free</a>
+            <div class="brands-wrapper">
+                <h6>Largets companies use our tool to work efficently</h6>
+                <div class="brands">
+                    <img src="images/brands/brand1.svg" alt="">
+                    <img src="images/brands/brand2.svg" alt="">
+                    <img src="images/brands/brand3.svg" alt="">
+                    <img src="images/brands/brand4.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@* <section id="@Model.Id" class="showcase">
+    <div class="container">
+        <img src="@Model.ShowcaseImage.ImageUrl" alt="@Model.ShowcaseImage.AltText" class="background-image">
+        <div class="content">
+            <h1>@Model.Title</h1>
+            <p>@Model.Text</p>
+            <a asp-controller="@Model.Link.ControllerName" asp-action="@Model.Link.ActionName" class="btn-theme-s btn-short">@Model.Link.Text</a>
+            <div class="brands-wrapper">
+                <h6>@Model.BrandsText</h6>
+                <div class="brands">
+                    @if (Model.Brands != null)
+                    {
+                        foreach(var brand in Model.Brands)
+                        {
+                            <img src="@brand.ImageUrl" alt="@brand.AltText">
+                            
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section> *@

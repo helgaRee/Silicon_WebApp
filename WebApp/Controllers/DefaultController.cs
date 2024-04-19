@@ -51,4 +51,17 @@ public class DefaultController : Controller
     }
 
 
+    [Route("/error")]
+    public IActionResult Error404(int? statusCode)
+    {
+        if (statusCode.HasValue && statusCode.Value == 404)
+        {
+            // Anpassa din felhanteringssida för 404-fel
+            return View("Error404");
+        }
+        // För andra felstatuskoder, returnera standardfelhanteringssidan
+        return View("Error");
+    }
+
+
 }

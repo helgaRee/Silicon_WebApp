@@ -13,7 +13,7 @@ header {
             grid-template-columns: auto 1fr auto auto;
             grid-template-areas: "logo menu switch buttons";
         }
-    
+
 
         #logo {
             grid-area: logo;
@@ -32,6 +32,23 @@ header {
                 gap: 15px;
 
                 @include text-nav;
+            }
+        }
+        //Hamburger menu
+        #mobileMenu {
+
+            @media (max-width: 991px) { 
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #f00f;
+                z-index: 1000;
+                display: block;
+                flex-direction: column; 
+                gap: 10px; 
+                padding: 15px; 
+                display: none;
             }
         }
 
@@ -61,6 +78,23 @@ header {
             @include lg {
                 display: flex;
             }
+
+            .profile {
+                display: flex;
+                justify-content: center;
+
+                .profile-image {
+                    position: relative;
+
+                    img {
+                        border-radius: 50%;
+                        height: 60px;
+                        width: 60px;
+                        object-fit: cover;
+                        border: 1px solid $gray-400;
+                    }
+                }
+            }
         }
 
         .btn-mobile {
@@ -78,9 +112,13 @@ header {
             height: 34px;
 
             .switch {
-
             }
         }
     }
 }
 
+@media (min-width: 1200px) {
+    #logo {
+        width: 8rem;
+    }
+}

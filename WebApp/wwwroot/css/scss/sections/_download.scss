@@ -1,13 +1,13 @@
 .download-app {
     background: $gray-100;
-     padding-block: 9rem; 
+    padding-block: 9rem;
 
     .container {
-        display: flex;
-        gap: 6rem;
+        text-align: center;
+
 
         img {
-            width: 50%;
+            width: 40%;
             height: 50%;
             align-self: center;
         }
@@ -20,15 +20,20 @@
             h2 {
                 @include h1;
                 margin-bottom: 40px;
+                text-align: center;
             }
 
             .box {
                 display: flex;
-                flex-direction: row-reverse;
-                justify-content: space-between;
+                flex-direction: column-reverse;
+                justify-content: center;
+                margin-bottom: 3rem;
             }
 
-            img {}
+            img {
+                width: 27%;
+                align-self: center;
+            }
 
             .box-content {
                 display: flex;
@@ -46,6 +51,7 @@
 
                 h4 {
                     @include h4;
+                    margin-bottom: 0;
                 }
 
                 p {
@@ -56,3 +62,117 @@
         }
     }
 }
+
+
+
+@media (min-width: 768px) {
+    .download-app {
+        padding-block: 9rem;
+
+        .container {
+            display: flex;
+            gap: 3.5rem;
+            padding-inline: 2rem;
+
+
+            img {
+                width: 45%;
+                align-self: center;
+            }
+
+            .content {
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+
+
+                h2 {
+                    @include h1;
+                    text-align: left;
+                    margin-bottom: 40px;
+                }
+
+                .box {
+                    flex-direction: column-reverse;
+                }
+
+                img {
+                    align-self: self-start;
+                    width: 44%;
+                }
+
+                .box-content {
+                    display: flex;
+                    flex-direction: column;
+                    text-align: left;
+
+                    span {
+                        @include text-m;
+                        color: $gray-600;
+                    }
+
+                    .rating {
+                        color: #FFBA08;
+                    }
+
+                    h4 {
+                        margin-top: 10px;
+                    }
+
+                    p {
+                        @include text-m;
+                        color: $gray-700;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media (min-width: 992px) {
+    .download-app {
+        .container {
+            .content {
+                .box {
+                    display: flex;
+                    flex-direction: row-reverse;
+                    justify-content: space-evenly;
+                }
+                img {
+                    align-self: self-end;
+                }
+            }
+            .box-content {
+                display: flex;
+                flex-direction: column;
+                text-align: left;
+                p {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .download-app {
+        .container {
+            .content {
+                img {
+                    align-self: self-end;
+                    width: 30%;
+                }
+            }
+            .box-content {
+                p {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+
+

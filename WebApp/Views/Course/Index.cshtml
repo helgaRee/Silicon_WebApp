@@ -7,16 +7,20 @@
 
 <section class="courses">
     <div class="container">
-        <h1>Courses</h1>
-        <form id="form-filters">
-            <select>
-                <option>All Categories</option>
-            </select>
-            <div class="input-serach-group">
-                <input id="searchQuery" name="searchQuery" placeholder="Search courses" />
-                <i class="fa-regular fa-search"></i>
-            </div>
-        </form>
+       
+        <div class="header">
+            <h1>Courses</h1>
+            <form id="form-filters">
+                <select>
+                    <option>All Categories</option>
+                </select>
+                <div class="input-search-group">
+                    <input id="searchQuery" name="searchQuery" placeholder="Search courses" />
+                    <i class="fa-regular fa-search"></i>
+                </div>
+            </form>
+        </div>
+        
         <div class="course-items">
             @if(Model.Courses != null)
             {

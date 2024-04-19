@@ -1,23 +1,21 @@
 .account-details {
+    margin-top: 6rem;
+
     h1 {
         text-align: center;
+        margin-bottom: 4rem;
     }
 
     .container {
+        margin: 0 auto;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        margin-bottom: 9rem;
 
         aside {
             text-align: center;
             grid-area: aside;
             margin: 0 auto;
-
-
-            h5 {
-            }
-
-            p {
-            }
 
             button {
                 margin-bottom: 1rem;
@@ -33,112 +31,103 @@
         }
 
         .account-information {
-            #form-headline {
-                grid-area: headline;
-            }
+            margin: 0 auto;
 
             #basicInfoForm {
                 grid-area: basic;
 
-
                 .form-content {
                     display: grid;
                     grid-template-columns: 1fr;
-                    grid-template-areas: "headline" "firstname" "lastname" "email" "phone" "biography" "submit" "cancel";
-                    width: 62.1%;
-                    margin: 0 auto;
-
+                    grid-template-areas: "firstname" "lastname" "email" "phone" "biography" "submit" "cancel";
 
                     .input-group {
+                        display: flex;
+                        flex-direction: column;
                         margin-bottom: 1rem;
+                        border-radius: 8px;
                     }
+                }
 
-                    #firstname {
-                        grid-area: firstname;
-                    }
+                #firstname {
+                    grid-area: firstname;
+                }
 
-                    #lastname {
-                        grid-area: lastname;
-                    }
+                #lastname {
+                    grid-area: lastname;
+                }
 
-                    #email {
-                        grid-area: email;
-                    }
+                #email-details {
+                    grid-area: email;
+                }
 
-                    #phone {
-                        grid-area: phone;
-                    }
+                #phone {
+                    grid-area: phone;
+                }
 
-                    #biography {
-                        grid-area: biography;
-                    }
+                #biography {
+                    grid-area: biography;
+                }
 
-                    #btn-submit {
-                        grid-area: submit;
-                    }
+                #btn-submit {
+                    grid-area: submit;
+                }
 
-                    #btn-cancel {
-                        grid-area: cancel;
-                    }
+                #btn-cancel {
+                    grid-area: cancel;
+                }
 
-                    textarea {
-                        height: 8rem;
-                    }
+                textarea {
+                    height: 8rem;
                 }
             }
+        }
 
+        #addressInfoForm {
+            grid-area: address;
+            margin-top: 4rem;
 
+            #form-headline {
+                grid-area: headline;
+            }
 
+            .form-content {
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-template-areas: "headline" "address1" "address2" "postalcode" "city" "cancel" "submit";
 
-
-
-
-            #addressInfoForm {
-                grid-area: address;
-
-                #form-headline {
-                    grid-area: headline;
+                .input-group {
+                    margin-bottom: 1rem;
                 }
 
-                .form-content {
-                    display: grid;
-                    grid-template-columns: 1fr;
-                    grid-template-areas: "headline" "address1" "address2" "postalcode" "city" "cancel" "submit";
-                    width: 62.1%;
-                    margin: 0 auto;
+                #address-line-1 {
+                    grid-area: address1;
+                }
 
-                    .input-group {
-                        margin-bottom: 1rem;
-                    }
+                #address-line-2 {
+                    grid-area: address2;
+                }
 
-                    #address-line-1 {
-                        grid-area: address1;
-                    }
+                #postalcode {
+                    grid-area: postalcode;
+                }
 
-                    #address-line-2 {
-                        grid-area: address2;
-                    }
+                #city {
+                    grid-area: city;
+                }
 
-                    #postalcode {
-                        grid-area: postalcode;
-                    }
+                #btn-submit {
+                    grid-area: submit;
+                }
 
-                    #city {
-                        grid-area: city;
-                    }
-
-                    #btn-submit {
-                        grid-area: submit;
-                    }
-
-                    #btn-cancel {
-                        grid-area: cancel;
-                    }
+                #btn-cancel {
+                    grid-area: cancel;
                 }
             }
         }
     }
 }
+
 
 .details-buttons {
     margin-top: 20px;
@@ -150,53 +139,33 @@
 }
 
 
-
 @media (min-width: 768px) {
 
     .account-details {
         .container {
-            margin-top: 2rem;
-
-            aside {
-
-            }
+            margin-top: 2px;
 
             .account-information {
-                h1 {
-                }
+                margin: 0 auto;
 
-                #basic-info {
-                    h5 {
-                        color: pink;
-                    }
+                #basicInfoForm {
+                    margin: 0 auto;
 
                     .form-content {
-                        margin-top: 10rem;
+                        margin-top: 2rem;
                         gap: 30px;
-
-
-                        .input-group {
-                        }
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        grid-template-areas:
+                            "firstname lastname" "email phone" "biography biography" "cancel submit";
+                        gap: 1rem;             
                     }
                 }
 
-
-
-
-
-
-
-                #address-info {
-                    h5 {
-                    }
-
+                #addressInfoForm {
                     .form-content {
                         gap: 30px;
                         display: grid;
-
-
-                        .input-group {
-                        }
                     }
                 }
             }
@@ -205,10 +174,7 @@
 
     .details-buttons {
         margin-top: 20px;
-
-
     }
-
 }
 
 @media (min-width: 992px) {
@@ -219,7 +185,6 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
             grid-template-areas: "aside basic" "aside address";
 
             aside {
@@ -227,12 +192,6 @@
                 margin: 0 auto;
                 border-right: 1px solid gray;
                 padding-right: 7rem;
-
-                h5 {
-                }
-
-                p {
-                }
 
                 button {
                     margin-bottom: 1rem;
@@ -246,29 +205,17 @@
             }
 
             .account-information {
-                h1 {
-                }
+                margin: 0 0 0 6rem;
 
                 #basicInfoForm {
                     grid-area: basic;
 
                     .form-content {
-                        display: grid;
-                        grid-template-columns: 1fr 1fr;
-                        grid-template-areas: "headline headline" "firstname lastname" "email phone" "biography biography" "cancel submit";
-                        gap: 1rem;
-
                         .input-group {
                             margin-bottom: 1rem;
                         }
                     }
                 }
-
-
-
-
-
-
 
                 #addressInfoForm {
                     grid-area: address;
@@ -290,118 +237,11 @@
 
     .details-buttons {
         margin-top: 20px;
- 
         gap: 10px;
-
-    }
-
-
-}
-
-
-@media (min-width: 1200px) {
-
-    .account-details {
-        .container {
-
-
-
-            aside {
-
-                h5 {
-                }
-
-                p {
-                }
-
-                button {
-                }
-
-                .settings {
-                }
-            }
-
-            .account-information {
-                h1 {
-                }
-
-                #basicInfoForm {
-
-                    .form-content {
-         
-
-
-                        .input-group {
-                        }
-
-                        #firstname {
-                        }
-
-                        #lastname {
-                        }
-
-                        #email {
-                        }
-
-                        #phone {
-                        }
-
-                        #biography {
-                        }
-
-                        #btn-submit {
-                        }
-
-                        #btn-cancel {
-                        }
-                    }
-                }
-
-
-
-
-
-
-
-                #addressInfoForm {
-
-
-                    h5 {
-                    }
-
-                    .form-content {
-
-
-                        .input-group {
-                        }
-
-                        #address-line-1 {
-                        }
-
-                        #address-line-2 {
-                        }
-
-                        #postalcode {
-                        }
-
-                        #city {
-                        }
-
-                        #btn-submit {
-                        }
-
-                        #btn-cancel {
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    .details-buttons {
-
     }
 }
+
+
 .field-validation-error{
     color: $danger;
     font-size: 0.9rem;

@@ -14,25 +14,27 @@
             </div>
         }
 
-        <form method="post" asp-action="SignIn" asp-controller="Auth" asp-route-ReturnUrl="@ViewData["ReturnUrl"]" novalidate">
+        <form method="post" asp-action="SignIn" asp-controller="Auth" asp-route-ReturnUrl="@ViewData["ReturnUrl"]" novalidate>
             <h1>Welcome Back</h1>
             <p>Don't have an account yet? <a asp-action="SignUp" asp-controller="Auth">Click here to register</a></p>
 
             <div class="form-content">
 
-                <div id=" form-email" class="input-group">
+                <div id="form-email" class="input-group">
                     <label asp-for="Email"></label>
-                    <input asp-for="Email" />
+                    <input id="email" required onkeyup="validateFormField(this)" type="email" asp-for="Email" />
+                    <span id="email-error" asp-validation-for="Email"></span>
                 </div>
 
-                <div id=" form-password" class="input-group">
+                <div id="form-password" class="input-group">
                     <label asp-for="Password"></label>
-                    <input asp-for="Password" />
+                    <input id="passwordSignin" required onkeyup="validateFormField(this)" type="password" asp-for="Password" />
+                    <span id="passwordSignin-error" asp-validation-for="Password"></span>
                 </div>
 
-                <div id=" form-checkbock" class="checkbox-group">
+                <div id="form-checkbox" class="checkbox-group">
                     <div class="input-group">
-                        <input asp-for="RememberMe" />
+                        <input id="checkbox" type="checkbox" asp-for="RememberMe" />
                         <label asp-for="RememberMe"></label>
                     </div>
                 </div>

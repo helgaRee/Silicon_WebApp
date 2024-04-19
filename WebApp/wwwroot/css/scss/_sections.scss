@@ -3,10 +3,10 @@
 @import './sections/_showcase';
 @import './sections/_features';
 @import './sections/_mockup';
-@import './sections/_dashboard';
+@import './sections/_dashboard.scss';
 @import './sections/_download';
 @import './sections/_workTools.scss';
-@import './sections/_newsletters';
+@import './sections/_subscriber.scss';
 @import './sections/_courses';
 @import './sections/_getStarted';
 @import './sections/_signin.scss';
@@ -14,3 +14,4 @@
 @import './sections/_accountDetails.scss';
 @import './sections/_accountAvatar.scss';
 @import './sections/_error_404.scss';
+

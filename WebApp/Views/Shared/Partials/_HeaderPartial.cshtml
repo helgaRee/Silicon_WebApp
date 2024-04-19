@@ -1,33 +1,30 @@
-﻿@inject SignInManager<UserEntity> _signInManager;
-
-@{
+﻿@{
     var themeMode = Context.Request.Cookies["ThemeMode"] ?? "light"; //requesten kmr in till servern, i den finns cookien 'themeMode', light = standard
-    var isDark = (themeMode == "dark") ? true : false; 
+    var isDark = (themeMode == "dark") ? true : false;
+    var user = await UserManager.GetUserAsync(User);
 }
 
 
 <header>
     <div class="container">
         <a asp-controller="Default" asp-action="Home" id="logo">
-            <img src="~/Images/icons/Group2.svg" Logotype for Silicon">
+            <img src="~/Images/icons/Group2.svg" alt="Logotype for Silicon">
         </a>
 
         <div id="menu">
-            <nav>
-                <a asp-controller="Default" asp-action="Home" asp-fragment="overview" class="menu-link">Overview</a>
-                <a asp-controller="Contact" asp-action="Home" class="menu-link">Contact</a>
-                @if (_signInManager.IsSignedIn(User))
+            <nav id="mobileMenu" class="mobile-menu">
+                @if (SignInManager.IsSignedIn(User))
                 {
+                    <a asp-controller="Default" asp-action="Home" asp-fragment="showcase" class="menu-link">Overview</a>
                     <a asp-controller="Course" asp-action="Index" class="menu-link">Courses</a>
                     <a asp-controller="Admin" asp-action="CreateCourse" class="menu-link">Admin</a>
                 }
                 else
                 {
+                    <a asp-controller="Default" asp-action="Home" asp-fragment="showcase" class="menu-link">Overview</a>
                     <a asp-controller="Default" asp-action="Home" asp-fragment="features" class="menu-link">Features</a>
+                    <a asp-controller="Contact" asp-action="Home" class="menu-link">Contact</a>
                 }
-
-
-                
             </nav>
         </div>
 
@@ -37,16 +34,25 @@
 
         <div id="theme-switch" class="btn-switch">
             <label>Light</label>
-            <label class="switch" for="switch-mode"></label>
-            <input type="checkbox" id="switch-mode" checked="@isDark"> 
-            <span class="slider round"></span>
+            <label class="switch" for="switch-mode">
+                <input type="checkbox" id="switch-mode" checked="@isDark"> 
+                <span class="slider round"></span>
+            </label>
             <label>Dark</label>
         </div>
 
         <div class="account-buttons">
-
-            @if (_signInManager.IsSignedIn(User))
+            @if (SignInManager.IsSignedIn(User))
             {
+                
+                <div class="profile">
+                    <div class="profile-image">
+                        <a asp-action="Details" asp-controller="Account">
+                            <img src="~/images/uploads/profiles/@user!.ProfileImage "/>
+                        </a>
+                    </div>
+                </div>
+
                 //visa denna vy om inloggad
                 <a class="btn-gray" asp-controller="Auth" asp-action="SignOut"><i class="fa-sharp fa-regular fa-arrow-right-from-bracket"></i> Sign out</a>
                 <a class="btn-theme" asp-controller="Account" asp-action="Details"><i class="fa-light fa-user-plus"></i>My Account</a>

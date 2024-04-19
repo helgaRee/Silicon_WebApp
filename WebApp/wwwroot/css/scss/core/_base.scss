@@ -24,6 +24,14 @@ h4, .h4 { @include h4; }
 h5, .h5 { @include h5; }
 h6, .h6 { @include h6; }
 
+/*.wrapper {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    max-width: 1200px;
+    margin: 0 auto;
+}*/
+
 .wrapper {
     height: 100vh;
     display: grid;

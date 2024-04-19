@@ -1,115 +1,125 @@
 .mockup {
-    margin-top: 30px;
-    text-align: center;
 
-    h2{
-        position: relative;
-        text-align: center;
-        justify-content: center;
-
-        .white-text{
-            color: $black;
-            
-            @media (min-width: 992px) {
-                color: $white;
-                position: relative;
-                text-align: center;
-            }
-        }
+    .black-div {
+        display: none;
     }
 
     .container {
-        position: relative;
-        display: flex;
+        padding: 3rem 0;
+        text-align: center;
 
-       .img-mockup {
-            margin: 0 auto;
-            width: 80%;
-            /* Säkerställ att bilden ligger ovanpå andra element */
-            @media (min-width: 756px) {
-                position: relative;
-                right: 71px;
-                top: 80px;
-                z-index: 1;
-                
-            }
-            
-            @media (min-width: 992px) {
-                position: relative;
-                right: 98px;
-
-            }
-            @media (min-width: 1200px) {
-                right: 115px;
-                top: 50px;
-                width: 80%;
-            }
-            @media (min-width: 1400px) {
-                right: 134px;
-
-            }
-        }
-        
-        .img-middle-line{
-            position: relative;
-            z-index: 1;
-            right: 54px;
-            height: 81%;
-            top: 15px;
-            width: 80%;
-            
-            @media (min-width: 756px) {
-                right: 72px;
-                height: 100%;
-                top: 1px;
-                
-            }
-            @media (min-width: 992px) {
-                right: 96px;
-                
-            }
-            @media (min-width: 1200px) {
-                right: 114px;
-            }
-            @media (min-width: 1400px) {
-                right: 133px;
-
-            }
-        }
-        
-        .dark-mode {
-            
-            display: none;
-            width: 50%;
-            background-color: $black;
-            border-right: 2px solid purple;
-            /* Sätt relativ position för att z-index ska fungera */
-            z-index: 0;
-            position: relative;
-            /* Säkerställ att .dark-mode ligger bakom bilden */
-            
-            @media (min-width: 756px) {
-                height: 500px;
-            }
-            @media (min-width: 992px) {
-                height: 700px;
-                display: block;
-            }
-        }
-
-        .flex-row {
-            position: relative;
+        .title {
             display: flex;
-        }
+            justify-content: center;
+            flex-direction: column;
 
+            h1 {
+                margin: 0;
+                font-size: 2rem !important;
+            }
+        }
+        .img-mockup {
+            width: 80%;
+            margin-top: 30px;
+        }
     }
 }
 
-.black{
-    background-color: black;
-    /* position: relative; */
-    width: 50%;
-    height: 50rem;
-    position: absolute;
-}
+@media(min-width: 373px) {
+    .mockup {
+        position: relative;
 
+        .black-div {
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            background-color: $black;
+            width: 50vw;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            padding: 3rem 0;
+            text-align: center;
+
+            .title {
+                display: flex;
+                justify-content: center;
+                flex-direction: row;
+
+                h1 {
+                    flex: 1;
+                    font-size: 1.9rem !important;
+                    margin: 0 auto;
+                    margin-bottom: 15px;
+                }
+
+                .light {
+                    color: $white;
+                    text-align: right;
+                }
+
+                .dark {
+                    text-align: left;
+                    color: $black;
+                    margin-left: 35px;
+                }
+            }
+
+            .img-mockup {
+                margin-left: 13px;
+                width: 64%;
+            }
+        }
+    }
+
+@media (min-width: 992px) {
+    .mockup {
+        position: relative;
+
+        .black-div {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            background-color: $black;
+            width: 50vw;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            padding: 3rem 0;
+            text-align: center;
+
+            .title {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+
+                h1 {
+                    flex: 1;
+                    font-size: 2.5rem !important;
+                    margin-bottom: 35px;
+                }
+
+                .light {
+                    color: $white;
+                    text-align: right;
+                }
+
+                .dark {
+                    text-align: left;
+                    color: $black;
+                    margin-left: 15px;
+                }
+            }
+
+            .img-mockup {
+                margin-left: 13px;
+            }
+        }
+    }
+}
+}

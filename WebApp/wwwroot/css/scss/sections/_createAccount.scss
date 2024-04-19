@@ -3,7 +3,7 @@
     margin-bottom: 30px;
 
     .container {
-        //.form-heading{grid-area: heading;}
+
         form {
             margin: 0 auto;
             display: grid;
@@ -18,7 +18,7 @@
             @media (min-width: 992px) {
                 width: 50%;
             }
-            /* Uppdaterat för att matcha koden nedan */
+
             label {
                 display: block;
             }
@@ -70,7 +70,6 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            /* Dela upp i två kolumner */
             grid-auto-rows: minmax(100px, auto);
             column-gap: 20px;
             grid-template-areas:
@@ -103,17 +102,6 @@
                     grid-area: terms;
                     flex-direction: row;
                     display: -webkit-inline-box;
-
-                    .checkbox-group {
-                        input {
-                        }
-
-                        label {
-                        }
-                    }
-
-                    .form-submit {
-                    }
                 }
             }
         }

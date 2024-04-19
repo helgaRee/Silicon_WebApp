@@ -31,23 +31,23 @@
                 <div class="form-content">
                     <div id="firstname" class="input-group">
                         <label asp-for="BasicInfo!.FirstName"></label>
-                        <input asp-for="BasicInfo!.FirstName" />
-                        <span asp-validation-for="BasicInfo!.FirstName"></span>
+                        <input id="firstName" required onkeyup="validateFormField(this)" type="text" asp-for="BasicInfo!.FirstName" />
+                        <span id="firstName-error" asp-validation-for="BasicInfo!.FirstName"></span>
                     </div>
                     <div id="lastname" class="input-group">
                         <label asp-for="BasicInfo!.LastName"></label>
-                        <input asp-for="BasicInfo!.LastName" />
-                        <span asp-validation-for="BasicInfo!.LastName"></span>
+                        <input id="lastName" required onkeyup="validateFormField(this)" type="text" asp-for="BasicInfo!.LastName" />
+                        <span id="lastName-error" asp-validation-for="BasicInfo!.LastName"></span>
                     </div>
                     <div id="email" class="input-group">
                         <label asp-for="BasicInfo!.Email"></label>
-                        <input asp-for="BasicInfo!.Email" />
-                        <span asp-validation-for="BasicInfo!.Email"></span>
+                        <input id="email-details" required onkeyup="validateFormField(this)" type="email" asp-for="BasicInfo!.Email" />
+                        <span id="email-error" asp-validation-for="BasicInfo!.Email"></span>
                     </div>
                     <div id="phone" class="input-group">
                         <label asp-for="BasicInfo!.PhoneNumber"></label>
-                        <input asp-for="BasicInfo!.PhoneNumber" />
-                        <span asp-validation-for="BasicInfo!.PhoneNumber"></span>
+                        <input id="phoneNumber" required onkeyup="validateFormField(this)" type="tel" asp-for="BasicInfo!.PhoneNumber" />
+                        <span id="phoneNumber-error" asp-validation-for="BasicInfo!.PhoneNumber"></span>
                     </div>
                     <div id="biography" class="input-group">
                         <label asp-for="BasicInfo!.Biography"></label>
@@ -68,23 +68,23 @@
                 <div class="form-content">
                     <div id="address-line-1" class="input-group">
                         <label asp-for="AddressInfo!.AddressLine_1"></label>
-                        <input asp-for="AddressInfo!.AddressLine_1" />
-                        <span asp-validation-for="AddressInfo!.AddressLine_1"></span>
+                        <input id="addressLine_1" required onkeyup="validateFormField(this)" type="text" asp-for="AddressInfo!.AddressLine_1" />
+                        <span id="addressLine_1_error" asp-validation-for="AddressInfo!.AddressLine_1"></span>
                     </div>
                     <div id="address-line-2" class="input-group">
                         <label asp-for="AddressInfo!.AddressLine_2"></label>
-                        <input asp-for="AddressInfo!.AddressLine_2" />
-                        <span asp-validation-for="AddressInfo!.AddressLine_2"></span>
+                        <input id="addressLine_2" onkeyup="validateFormField(this)" type="text" asp-for="AddressInfo!.AddressLine_2" />
+                        <span id="addressLine_2_error" asp-validation-for="AddressInfo!.AddressLine_2"></span>
                     </div>
                     <div id="postalcode" class="input-group">
                         <label asp-for="AddressInfo!.PostalCode"></label>
-                        <input asp-for="AddressInfo!.PostalCode" />
-                        <span asp-validation-for="AddressInfo!.PostalCode"></span>
+                        <input id="postalCode" required onkeyup="validateFormField(this)" type="number" asp-for="AddressInfo!.PostalCode" />
+                        <span id="postalCode_error" asp-validation-for="AddressInfo!.PostalCode"></span>
                     </div>
                     <div id="city" class="input-group">
                         <label asp-for="AddressInfo!.City"></label>
-                        <input asp-for="AddressInfo!.City" />
-                        <span asp-validation-for="AddressInfo!.City"></span>
+                        <input id="city" required onkeyup="validateFormField(this)" type="text" asp-for="AddressInfo!.City" />
+                        <span id="city_error" asp-validation-for="AddressInfo!.City"></span>
                     </div>
                 </div>
                 <div class="details-buttons">

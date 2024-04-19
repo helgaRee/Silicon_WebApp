@@ -3,10 +3,10 @@
 <section id="subscribe" class="subscribe">
     <div class="container">
         <div class="title">
-            <h2>Don't want to miss Anything</h2>
+            <h2>Don't want to miss Anything?</h2>
             <img src="~/images/icons/arrow_curly.svg" alt="swirl arrow">
         </div>            
-            <form method="post" asp-action="Subscribe" asp-controller="Default">
+            <form method="post" asp-action="Subscribe" asp-controller="Default" novalidate>
              <div class="alternative">
                  <h4 id="">Sign up for Newsletters</h4>
 
@@ -57,12 +57,13 @@
 
                 <div class="form-email">
                     <div class="input-group">
-                        <i class="fa-regular fa-envelope"></i>
-                        <input asp-for="Email"/>
+                        <div class="fieldButton">
+                            <i class="fa-regular fa-envelope"></i>
+                            <input id="email-subscriber" required onkeyup="validateFormField(this)" type="email" asp-for="Email"/>
+                            <button type="submit" class="btn btn-theme">Subscribe *</button>
+                        </div>
+                        <span id="email-error" asp-validation-for="Email"></span>
                     </div>
-                    <button type="submit" class="btn-gray btn-theme">Subscribe *</button>
-                </div>
-
             @if(!string.IsNullOrEmpty(TempData["StatusMessage"]?.ToString()))
             {
                 <span class="status-message">@TempData["StatusMessage"]</span>
@@ -70,7 +71,9 @@
             else
             {
                 <span class="status-message">* Yes, I agree to the terms and privacy policy.</span>
-            }
+            }           
+                </div>
+
         </form>
 
     </div>

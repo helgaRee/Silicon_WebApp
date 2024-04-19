@@ -14,45 +14,45 @@
             </div>
         }
 
-        <form method="post" asp-action="SignUp" asp-controller="Auth" asp-route-ReturnUrl="@ViewData["ReturnUrl"]" novalidate">
+        <form id="signupForm" onsubmit="register(event)" method="post" asp-action="SignUp" asp-controller="Auth" asp-route-ReturnUrl="@ViewData["ReturnUrl"]" novalidate>
             <h1>Welcome Back</h1>
             <p>Already have an account? <a asp-action="SignIn" asp-controller="Auth">Click here to Sign in</a></p>
 
             <div class="form-content">
-                <div id=" form-firstName" class="input-group">
+                <div id="form-firstname" class="input-group">
                     <label asp-for="FirstName"></label>
-                    <input asp-for="FirstName" />
-                    <span asp-asp-validation-for="FirstName"></span>
+                    <input id="firstName" required onkeyup="validateFormField(this)" type="text" asp-for="FirstName" />
+                    <span id="firstName-error" asp-validation-for="FirstName"></span>
                 </div>
-                <div id=" form-lastName" class="input-group">
+                <div id="form-lastname" class="input-group">
                     <label asp-for="LastName"></label>
-                    <input asp-for="LastName" />
-                    <span asp-asp-validation-for="LastName"></span>
+                    <input id="lastName" required onkeyup="validateFormField(this)" type="text" asp-for="LastName" />
+                    <span id="lastName-error" asp-validation-for="LastName"></span>
                 </div>
-                <div id=" form-email" class="input-group">
+                <div id="form-email" class="input-group">
                     <label asp-for="Email"></label>
-                    <input asp-for="Email" />
-                    <span asp-asp-validation-for="Email"></span>
+                    <input id="email" required onkeyup="validateFormField(this)" type="email" asp-for="Email" />
+                    <span id="email-error" asp-validation-for="Email"></span>
                 </div>
 
-                <div id=" form-password" class="input-group">
+                <div id="form-password" class="input-group">
                     <label asp-for="Password"></label>
-                    <input asp-for="Password" />
-                    <span asp-asp-validation-for="Password"></span>
+                    <input id="password" required onkeyup="validateFormField(this)" type="password" asp-for="Password" />
+                    <span id="password-error" asp-validation-for="Password"></span>
                 </div>
 
-                <div id=" form-confirmPassword" class="input-group">
+                <div id="form-confirmPassword" class="input-group">
                     <label asp-for="ConfirmPassword"></label>
-                    <input asp-for="ConfirmPassword" />
-                    <span asp-asp-validation-for="Password"></span>
+                    <input id="confirmPassword" required data-comparewith="password" onkeyup="validateFormField(this)" type="password" asp-for="ConfirmPassword" />
+                    <span id="confirmPassword-error" asp-validation-for="ConfirmPassword"></span>
                 </div>
 
-                <div id=" form-checkbock" class="checkbox-group">
+                <div id="form-terms" class="checkbox-group">
                     <div class="input-group">
-                        <input asp-for="TermsAndConditions" />
-                        <label asp-for="TermsAndConditions"></label>
+                        <input id="terms" type="checkbox" asp-for="TermsAndConditions" />
+                        <label type="checkbox" asp-for="TermsAndConditions"></label>
                     </div>
-                    <span asp-asp-validation-for="TermsAndConditions"></span>
+                    <span id="terms-error" asp-validation-for="TermsAndConditions"></span>
                 </div>
                 <div id="form-button">
                     <button type="submit" class="btn btn-theme"><i class="fa-regular fa-arrow-left-to-bracket"></i>Sign Up</button>

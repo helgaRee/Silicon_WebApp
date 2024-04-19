@@ -1,0 +1,102 @@
+﻿<section class="features">
+    <div class="container">
+        <div class="title">
+            <h1>What do you Get with Our Tool?</h1>
+            <p>Make sure all your tasks are organized so you can set the priorities and focus on importans.</p>
+        </div>
+
+        <div class="tool-features">
+            <div id="feature-1" class="feature">
+                <div class="icon">
+                    <img src="~/images/icons/icon_analytics.svg"/>
+                </div>
+                <h5>Comments on tasks</h5>
+                <p>andiowio ijfijfiwofj wfjiowejf iowjef</p>
+            </div>
+
+            <div id="feature-2" class="feature">
+                <div class="icon">
+                    <img src="~/images/icons/icon_assignments.svg" />
+                </div>
+                <h5>Comments on tasks</h5>
+                <p>andiowio ijfijfiwofj wfjiowejf iowjef</p>
+            </div>
+
+            <div id="feature-3" class="feature">
+                <div class="icon">
+                    <img src="~/images/icons/icon_comments.svg" />
+                </div>
+                <h5>Comments on tasks</h5>
+                <p>andiowio ijfijfiwofj wfjiowejf iowjef</p>
+            </div>
+
+            <div id="feature-4" class="feature">
+                <div class="icon">
+                    <img src="~/images/icons/icon_notifications.svg" />
+                </div>
+                <h5>Comments on tasks</h5>
+                <p>andiowio ijfijfiwofj wfjiowejf iowjef</p>
+            </div>
+
+            <div id="feature-5" class="feature">
+                <div class="icon">
+                    <img src="~/images/icons/icon_security.svg" />
+                </div>
+                <h5>Comments on tasks</h5>
+                <p>andiowio ijfijfiwofj wfjiowejf iowjef</p>
+            </div>
+
+            <div id="feature-6" class="feature">
+                <div class="icon">
+                    <img src="~/images/icons/icon_subtasks.svg" />
+                </div>
+                <h5>Comments on tasks</h5>
+                <p>andiowio ijfijfiwofj wfjiowejf iowjef</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+@* 
+@inject FeatureService _featureService
+@{
+    //hämtar information till denna section
+    //eftersom jag ovan anv GetAllFeatures-metoden, vilket är en lista av items, beh jag skapa en lista nedan
+    //och konverterar till en lista
+
+    var result = await _featureService.GetAllFeaturesAsync();
+    List<FeatureEntity> content = (List<FeatureEntity>)result.ContentResult!;
+
+
+    if (content == null)
+    {
+        ResponseFactory.Error("Something went wrong..");
+        <h1>KAN EJ VISAS</h1>
+    }
+    else
+    {
+        var feature = content.First(); //hämtar ut första
+        @if (content != null) {
+            <section class="features">
+                <div class="container">
+                    <h1>@feature.Title</h1>
+                    <p>@feature.Ingress</p>
+
+                    <div class="tool-features">
+                        @foreach(var item in feature.FeatureItems)
+                        {
+                            <div class="box border-right border-bottom">
+                                <img src="images/icons//@item.ImageUrl" alt="">
+                                <h5>@item.Title</h5>
+                                <p>@item.Text</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </section>
+        }
+    }
+} *@
