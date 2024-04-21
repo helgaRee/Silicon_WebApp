@@ -4,17 +4,14 @@
 }
 
 <section class="signin">
-    <div class="container">
-
-        
+    <div class="container">       
         @if (!string.IsNullOrEmpty(TempData["StatusMessage"]?.ToString()))
         {
             <div class="error-message alert alert-danger">
                 @TempData["StatusMessage"]
             </div>
         }
-
-        <form method="post" asp-action="SignIn" asp-controller="Auth" asp-route-ReturnUrl="@ViewData["ReturnUrl"]" novalidate>
+        <form id="signinForm" method="post" asp-action="SignIn" asp-controller="Auth" asp-route-ReturnUrl="@ViewData["ReturnUrl"]" novalidate>
             <h1>Welcome Back</h1>
             <p>Don't have an account yet? <a asp-action="SignUp" asp-controller="Auth">Click here to register</a></p>
 
@@ -43,8 +40,6 @@
                 </div>
                 <a id="form-forgot-password" asp-controller="Account" asp-action="Forgot">Forgot your password?</a>
             </div>
-
         </form>
-
     </div>
 </section>

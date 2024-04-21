@@ -62,14 +62,14 @@ function register(event) {
     console.log(1)
     let allFieldsValid = true;
 
-    for (let element of event.target) {
-        if (element.required) {
-            let isValid = validateFormField(element);
-            if (!isValid) {
-                allFieldsValid = false;
-            }
-        }
-    }
+    //for (let element of event.target) {
+    //    if (element.required) {
+    //        let isValid = validateFormField(element);
+    //        if (!isValid) {
+    //            allFieldsValid = false;
+    //        }
+    //    }
+    //}
     console.log(2)
 
     if (allFieldsValid) {

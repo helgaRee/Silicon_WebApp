@@ -15,11 +15,18 @@
 
             .input-search-group {
                 margin-bottom: 10px;
+                position: relative;
 
                 input {
                     padding: 15px;
                     width: 100%;
                     margin-top: 10px;
+                }
+
+                i {
+                    position: absolute;
+                    bottom: 20px;
+                    right: 14px;
                 }
             }
         }
@@ -132,6 +139,34 @@
     }
 }
 
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 5rem;
+
+    .pag-item {
+        padding-inline: 15px;
+        padding-block: 7px;
+        text-decoration: none;
+        border-radius: 5px;
+        color: $gray-800;
+
+
+        &:hover {
+            background: $gray-200;
+            text-decoration: underline;
+        }
+
+        &:active {
+            background: $gray-600;
+            color: $gray-100;
+        }
+    }
+}
+
 @media (min-width: 992px) {
     #form-filters {
 
@@ -140,7 +175,7 @@
         }
 
         .input-search-group {
-            margin-bottom: 10px;
+            
 
             input {
                 padding: 15px;

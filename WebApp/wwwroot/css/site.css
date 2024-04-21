@@ -1735,11 +1735,17 @@ footer .container .social-media {
 }
 .courses .container #form-filters .input-search-group {
   margin-bottom: 10px;
+  position: relative;
 }
 .courses .container #form-filters .input-search-group input {
   padding: 15px;
   width: 100%;
   margin-top: 10px;
+}
+.courses .container #form-filters .input-search-group i {
+  position: absolute;
+  bottom: 20px;
+  right: 14px;
 }
 .courses .container .header {
   display: flex;
@@ -1827,10 +1833,30 @@ footer .container .social-media {
   margin-right: 5px;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 5rem;
+}
+.pagination .pag-item {
+  padding-inline: 15px;
+  padding-block: 7px;
+  text-decoration: none;
+  border-radius: 5px;
+  color: #33354D;
+}
+.pagination .pag-item:hover {
+  background: #EFF2FC;
+  text-decoration: underline;
+}
+.pagination .pag-item:active {
+  background: #9397AD;
+  color: #F3F6FF;
+}
+
 @media (min-width: 992px) {
-  #form-filters .input-search-group {
-    margin-bottom: 10px;
-  }
   #form-filters .input-search-group input {
     padding: 15px;
     width: 50%;
@@ -2023,7 +2049,7 @@ footer .container .social-media {
     margin-bottom: 4rem;
   }
   .signin .container form .form-content {
-    width: 80%;
+    width: 50%;
     margin: 0 auto;
   }
 }
